@@ -59,7 +59,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'dotenv-rails', groups: [:development, :test]
-gem 'google_sign_in'
+gem 'google_sign_in', github: 'basecamp/google_sign_in'
 gem 'slim-rails'
 gem 'bulma-rails', '= 0.7.2'
 gem 'pundit'
