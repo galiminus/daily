@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       cookies.signed[:user_id] = { value: user.id, expires: 1.year.from_now }
       redirect_to root_url
     else
-      redirect_to new_session_url, alert: 'authentication_failed'
+      redirect_to root_url, alert: 'authentication_failed'
     end
   end
 
