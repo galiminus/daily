@@ -32,15 +32,7 @@
                 | What amount is spent every month?
             .control
               = f.number_field :value, placeholder: "20", class: 'input is-large  is-info', required: true, step: 0.01
-          .field
-            label.label
-              - if f.object.recurring?
-                | For how long?
-              - else
-                | Do you want to spread this spending on more than a day?
-            .control
-              .select.is-large.is-fullwidth
-                = f.select :spread, spread_options_for(f.object).map { |duration, name| [name, duration] }
+
         footer.modal-card-foot
           .level.is-mobile
             .level-left
