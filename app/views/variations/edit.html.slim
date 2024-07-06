@@ -12,6 +12,16 @@
         section.modal-card-body
           - if flash[:error].present?
             .notification.is-danger= flash[:error]
+
+          .field
+            label.label
+              - if f.object.recurring?
+                | What amount is spent every month?
+              - else
+                | What amount did you spent?
+            .control
+              = f.number_field :value, placeholder: "20", class: 'input is-large  is-info', required: true, step: 0.01, autofocus: true
+
           .field
             label.label
               | Give it a short and meaningful name
@@ -21,15 +31,6 @@
                 datalist id="label-list"
                   - @current_user.variations.where(recurring: false, base: false).pluck(:label).uniq.each do |label|
                     option value=label
-
-          .field
-            label.label
-              - if f.object.recurring?
-                | What amount is spent every month?
-              - else
-                | What amount did you spent?
-            .control
-              = f.number_field :value, placeholder: "20", class: 'input is-large  is-info', required: true, step: 0.01
 
         footer.modal-card-foot
           .level.is-mobile

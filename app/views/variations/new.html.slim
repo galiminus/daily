@@ -15,15 +15,7 @@
         section.modal-card-body
           - if flash[:error].present?
             .notification.is-danger= flash[:error]
-          .field
-            label.label
-              | Give it a short and meaningful name
-            .control
-              = f.text_field :label, placeholder: "Restaurant", class: 'input is-large is-info', required: true, list: 'label-list'
-              - if params[:recurring] == 'false'
-                datalist id="label-list"
-                  - @current_user.variations.where(recurring: false, base: false).pluck(:label).uniq.each do |label|
-                    option value=label
+
           .field
             label.label
               - if params[:recurring] == 'false'
@@ -31,7 +23,17 @@
               - else
                 | What amount is spent every month?
             .control
-              = f.number_field :value, placeholder: "20", class: 'input is-large  is-info', required: true, step: 0.01
+              = f.number_field :value, placeholder: "20", class: 'input is-large  is-info', required: true, step: 0.01, autofocus: true
+
+          .field
+            label.label
+              | Give it a short and meaningful name
+            .control
+              = f.text_field :label, value: (params[:recurring] == 'false' ? "Other" : nil), placeholder: "Restaurant", class: 'input is-large is-info', required: true, list: 'label-list'
+              - if params[:recurring] == 'false'
+                datalist id="label-list"
+                  - @current_user.variations.where(recurring: false, base: false).pluck(:label).uniq.each do |label|
+                    option value=label
 
         footer.modal-card-foot
           .level.is-mobile
